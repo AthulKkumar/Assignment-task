@@ -45,7 +45,7 @@ const Registration = (props) => {
         }
 
         //To check if the user is less than 18
-        if (age < 18) {
+        if (age < 18 || isNaN(age)) {
             found = false;
             setDobErr("You are less than 18")
         }
@@ -89,15 +89,15 @@ const Registration = (props) => {
             userObj.push(userData) //Pushing new user into the array 
             localStorage.setItem("users", JSON.stringify(userObj))
             props.showAlert("Added Successfully", "success")
-            e.preventDefault()
-
+            
         }
+        e.preventDefault()
     }
 
 
     return (
         <div className="container">
-            <div className='container w-50 mt-2 signup'>
+            <div className='container w-50 mt-2 m-2 signup'>
                 <h2 className="">Sign Up</h2>
                 <hr></hr>
                 <form>
