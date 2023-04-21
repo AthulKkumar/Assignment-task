@@ -1,5 +1,10 @@
+body{
+  background-color:snow;
+  
+}
+
 .signup{
   border-radius: 10px;
   height: 75vh;
-  background-color:snow;
+  background-color:wheat;
 }

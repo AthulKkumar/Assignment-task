@@ -8,13 +8,13 @@ const Registration = (props) => {
     const [userData, setUserData] = useState({ name: "", email: "", dob: "" })
     const [nameErr, setNameErr] = useState("") //For setting error in name feild
     const [emailErr, setEmailErr] = useState("") //For setting error in email feild
-    const [dobErr, setDobErr] = useState("") //
+    const [dobErr, setDobErr] = useState("") //For setting error in dob feild
+
     let users = localStorage.getItem('users')
     const usersObj = JSON.parse(users)
     const birthDay = new Date(userData.dob).getFullYear()
     let today = Date.now()
     let age = Math.abs(birthDay - new Date(today).getFullYear())
-    console.log(age);
 
 
     const handleChange = (e) => {
@@ -37,7 +37,7 @@ const Registration = (props) => {
 
         // To check if the current email is already existing in the local storage
         for (var i = 0; i < users.length; i++) {
-            if (users[i].email == userData.email) {
+            if (users[i].email === userData.email) {
                 found = false;
                 setEmailErr("Email Alredy Exist")
                 break;
@@ -63,8 +63,8 @@ const Registration = (props) => {
 
     }
 
-    const validateForm = (e) => {
 
+    const validateForm = (e) => {
 
         let users = localStorage.getItem('users')
         //Checks wether user is present or not 
@@ -94,10 +94,11 @@ const Registration = (props) => {
         }
     }
 
+
     return (
         <div className="container">
             <div className='container w-50 mt-2 signup'>
-                <h2>Sign Up</h2>
+                <h2 className="">Sign Up</h2>
                 <hr></hr>
                 <form>
                     <div className="mb-3">
@@ -117,8 +118,8 @@ const Registration = (props) => {
                     <div className="mb-3">
                         <label htmlFor="dob" className="form-label">Date of Birth</label>
                         <input type="date" className="form-control" id="dob" name='dob' onChange={handleChange} aria-describedby="emailHelp" />
-                        <span className="badge text-bg-secondary">{age === NaN ? 0:age}</span>
-                        <span className='text-danger'>{dobErr}</span>
+                        <span className="badge text-bg-secondary mt-2 mx-2">{!isNaN(age) ? age : 0}</span>
+                        <span className='text-danger mx-2'>{dobErr}</span>
                     </div>
 
                     <button type="submit" onClick={validateForm} className="btn btn-success">Submit</button>
@@ -130,7 +131,6 @@ const Registration = (props) => {
             <div className="row">
 
                 {usersObj === null ? "No Users" : usersObj.map((user, index) => {
-                    // console.log(user.name, "yo yo");
                     let userName = user.name;
                     let userEmail = user.email;
                     return <Userslist key={index} userName={userName} userEmail={userEmail} />
