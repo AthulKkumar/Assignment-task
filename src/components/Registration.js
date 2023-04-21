@@ -32,6 +32,7 @@ const Registration = (props) => {
         }
         else {
             console.log("Enter valid email");
+            setEmailErr("Enter vaild email")
             found = false
         }
 
